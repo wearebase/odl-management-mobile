@@ -26,7 +26,7 @@
             yeoman: yeomanConfig,
             jshint: {
                 gruntfile: ['Gruntfile.js'],
-                files: ['www/**/*.js', 'test/**/*.js'],
+                files: ['www/js/**/*.js', 'www/spec/tests/**/*.js'],
                 options: {
                     // options here to override JSHint defaults
                     globals: {
@@ -205,7 +205,7 @@
         grunt.registerTask('device', ['cordova-buildrun']);
         grunt.registerTask('live-device', ['cordova-buildrun', 'watch:livedevice']);
 
-        grunt.registerTask('default', ['jasmine']);
-        grunt.registerTask('travis', ['jasmine']);
+        grunt.registerTask('default', ['travis']);
+        grunt.registerTask('travis', ['jshint','jasmine']);
     };
 }());
