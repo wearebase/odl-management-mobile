@@ -10,5 +10,8 @@
     "grunt-contrib-jasmine": "*",
     "grunt-shell": "~0.3.0",
     "matchdep": "~0.1.1"
+  },
+  "scripts": {
+    "test": "grunt travis --verbose"
   }
 }

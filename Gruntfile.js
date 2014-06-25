@@ -206,5 +206,6 @@
         grunt.registerTask('live-device', ['cordova-buildrun', 'watch:livedevice']);
 
         grunt.registerTask('default', ['jasmine']);
+        grunt.registerTask('travis', ['jasmine']);
     };
 }());
