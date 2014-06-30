@@ -83,12 +83,13 @@
                 rippleend: {
                     command: 'killall -9 "cordova ripple"'
                 }
-            
+
             },
             jasmine: {
                 customTemplate: {
                     src: 'www/js/**/*.js',
-                    options: {        
+                    options: {
+                        vendor: ['www/components/angular/angular.js', 'www/components/angular-mocks/angular-mocks.js'],
                         specs: 'www/spec/tests/**/*.js',
                         helpers: 'www/spec/helpers/**/*.js'
                     }

@@ -4,25 +4,73 @@
         "uninstalled": []
     },
     "config_munge": {
-        "res/xml/config.xml": {
-            "/*": {
-                "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>": 1
+        "files": {
+            "res/xml/config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
+                            "count": 1
+                        }
+                    ],
+                    "/widget": [
+                        {
+                            "xml": "<feature name=\"ScanditSDK\"><param name=\"android-package\" value=\"com.mirasense.scanditsdk.plugin.ScanditSDK\" /></feature>",
+                            "count": 1
+                        }
+                    ]
+                }
             },
+            "AndroidManifest.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.CAMERA\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.VIBRATE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.INTERNET\" />",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest/application": [
+                        {
+                            "xml": "<activity android:name=\"com.mirasense.scanditsdk.plugin.ScanditSDKActivity\" />",
+                            "count": 1
+                        }
+                    ]
+                }
+            }
+        },
+        "res/xml/config.xml": {
             "/widget": {
-                "<feature name=\"ScanditSDK\"><param name=\"android-package\" value=\"com.mirasense.scanditsdk.plugin.ScanditSDK\" /></feature>": 1
+                "<feature name=\"ScanditSDK\"><param name=\"android-package\" value=\"com.mirasense.scanditsdk.plugin.ScanditSDK\" /></feature>": 0
+            },
+            "/*": {
+                "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>": 0
             }
         },
         "AndroidManifest.xml": {
-            "/*": {
-                "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />": 1
-            },
             "/manifest": {
-                "<uses-permission android:name=\"android.permission.CAMERA\" />": 1,
-                "<uses-permission android:name=\"android.permission.VIBRATE\" />": 1,
-                "<uses-permission android:name=\"android.permission.INTERNET\" />": 1
+                "<uses-permission android:name=\"android.permission.CAMERA\" />": 0,
+                "<uses-permission android:name=\"android.permission.VIBRATE\" />": 0,
+                "<uses-permission android:name=\"android.permission.INTERNET\" />": 0
             },
             "/manifest/application": {
-                "<activity android:name=\"com.mirasense.scanditsdk.plugin.ScanditSDKActivity\" />": 1
+                "<activity android:name=\"com.mirasense.scanditsdk.plugin.ScanditSDKActivity\" />": 0
+            },
+            "/*": {
+                "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />": 0
             }
         }
     },

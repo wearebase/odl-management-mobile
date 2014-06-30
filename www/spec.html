@@ -23,16 +23,19 @@
 
         <!-- jasmine source -->
         <link rel="shortcut icon" type="image/png" href="spec/lib/jasmine-1.2.0/jasmine_favicon.png">
-        <link rel="stylesheet" type="text/css" href="spec/lib/jasmine-1.2.0/jasmine.css">
-        <script type="text/javascript" src="spec/lib/jasmine-1.2.0/jasmine.js"></script>
-        <script type="text/javascript" src="spec/lib/jasmine-1.2.0/jasmine-html.js"></script>
+        <link rel="stylesheet" type="text/css" href="components/jasmine/lib/jasmine-core/jasmine.css">
+        <script type="text/javascript" src="components/jasmine/lib/jasmine-core/jasmine.js"></script>
+        <script type="text/javascript" src="components/jasmine/lib/jasmine-core/jasmine-html.js"></script>
+        <script type="text/javascript" src="components/jasmine/lib/jasmine-core/boot.js"></script>
 
         <!-- include source files here... -->
-        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="components/angular/angular.js"></script>
+        <script type="text/javascript" src="components/angular-mocks/angular-mocks.js"></script>
+        <script type="text/javascript" src="js/odl.js"></script>
 
         <!-- include spec files here... -->
         <script type="text/javascript" src="spec/helpers/helper.js"></script>
-        <script type="text/javascript" src="spec/tests/index.js"></script>
+        <script type="text/javascript" src="spec/tests/cordovaService.js"></script>
 
         <script type="text/javascript">
             (function() {
