@@ -7,15 +7,23 @@
         "files": {
             "res/xml/config.xml": {
                 "parents": {
+                    "/widget": [
+                        {
+                            "xml": "<feature name=\"ScanditSDK\"><param name=\"android-package\" value=\"com.mirasense.scanditsdk.plugin.ScanditSDK\" /></feature>",
+                            "count": 1
+                        }
+                    ],
                     "/*": [
                         {
                             "xml": "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>",
                             "count": 1
-                        }
-                    ],
-                    "/widget": [
+                        },
                         {
-                            "xml": "<feature name=\"ScanditSDK\"><param name=\"android-package\" value=\"com.mirasense.scanditsdk.plugin.ScanditSDK\" /></feature>",
+                            "xml": "<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -23,12 +31,6 @@
             },
             "AndroidManifest.xml": {
                 "parents": {
-                    "/*": [
-                        {
-                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
-                            "count": 1
-                        }
-                    ],
                     "/manifest": [
                         {
                             "xml": "<uses-permission android:name=\"android.permission.CAMERA\" />",
@@ -48,6 +50,16 @@
                             "xml": "<activity android:name=\"com.mirasense.scanditsdk.plugin.ScanditSDKActivity\" />",
                             "count": 1
                         }
+                    ],
+                    "/*": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
+                            "count": 1
+                        }
                     ]
                 }
             }
@@ -57,7 +69,9 @@
                 "<feature name=\"ScanditSDK\"><param name=\"android-package\" value=\"com.mirasense.scanditsdk.plugin.ScanditSDK\" /></feature>": 0
             },
             "/*": {
-                "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>": 0
+                "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>": 0,
+                "<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>": 0,
+                "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>": 0
             }
         },
         "AndroidManifest.xml": {
@@ -70,15 +84,22 @@
                 "<activity android:name=\"com.mirasense.scanditsdk.plugin.ScanditSDKActivity\" />": 0
             },
             "/*": {
-                "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />": 0
+                "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />": 0,
+                "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />": 0
             }
         }
     },
     "installed_plugins": {
+        "com.mirasense.scanditsdk.plugin": {
+            "PACKAGE_NAME": "org.wds.odl.mobile"
+        },
         "org.apache.cordova.camera": {
             "PACKAGE_NAME": "org.wds.odl.mobile"
         },
-        "com.mirasense.scanditsdk.plugin": {
+        "org.apache.cordova.network-information": {
+            "PACKAGE_NAME": "org.wds.odl.mobile"
+        },
+        "org.apache.cordova.device": {
             "PACKAGE_NAME": "org.wds.odl.mobile"
         }
     },

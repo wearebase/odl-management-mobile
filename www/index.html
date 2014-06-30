@@ -1,42 +1,57 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
     <head>
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" href="components/foundation/css/normalize.css">
+        <link rel="stylesheet" href="components/foundation/css/foundation.css">        
+        <link href="components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="css/odl.css">        
+        <script src="components/modernizr/modernizr.js"></script>
         <title>Hello World</title>
     </head>
-    <body>
-        <div class="app" ng-app="odl">
-            <h1>Apache Cordova</h1>
-            <div ng-controller="ReadyController" id="deviceready" class="blink">
-                <p ng-show="!ready" class="event listening">Connecting to Device</p>
-                <p ng-show="ready" class="event received">Device is Ready</p>
-            </div>
+    <body ng-app="odl">
+        <div class="fixed">
+            <nav class="top-bar" data-topbar="">
+                <ul class="title-area text-center">
+                    <li class="name">
+                        <h1><i class="fa fa-mobile"></i> Open Device Lab</h1>
+                    </li>
+                    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+                </ul>
+                <section class="top-bar-section">
+                    <ul class="left">
+                        <li><a target="_blank" href="http://odl.wearebase.com/">Open Device Lab</a></li>
+                        <li><a target="_blank" href="http://www.wds.co">WDS</a></li>
+                    </ul>
+                    <ul class="right">
+                        <li><a target="_blank" href="https://github.com/wearebase/odl-management-webapp"><i class="fa fa-github"></i> Contribute</a></li>
+                    </ul>
+                </section>
+            </nav>
         </div>
+        <div class="app">  
+            <h3><i class="fa fa-sun-o"></i> Bournemouth</h3>          
+            <div ng-controller="ReadyController" id="deviceready" class="actions">
+                <p ng-show="!ready" class="event listening">Connecting to Device</p>
+                <ul class="small-block-grid-2 medium-block-grid-4 large-block-grid-5" ng-show="ready">
+                    <li><a href="#info" class="button expand"><i class="fa fa-mobile"></i> DEVICE INFO</a></li>
+                    <li><a href="#add" class="button expand"><i class="fa fa-plus"></i> ADD DEVICE</a></li>
+                    <li><a href="#checkin" class="button expand"><i class="fa fa-sign-in"></i> CHECK IN</a></li>
+                    <li><a href="#checkout" class="button expand"><i class="fa fa-sign-out"></i> CHECK OUT</a></li>                    
+                </ul>
+            </div>
+        </div>       
+        <footer>
+            With <i class="fa fa-heart"></i> by WDS
+        </footer> 
+        <script src="components/jquery/dist/jquery.min.js"></script>
+        <script src="components/foundation/js/foundation.min.js"></script>
+        <script>$(document).foundation();</script>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="components/angular/angular.js"></script>
-
         <script type="text/javascript" src="js/odl.js"></script>
     </body>
 </html>
