@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="scanditsdk_initial_scan_screen_state">Strichcode ausrichten</string>
+    <string name="scanditsdk_barcode_presence_detected">Strichcode ausrichten...</string>
+    <string name="scanditsdk_barcode_decoding_in_progress">Decodiere...</string>
+    <string name="scanditsdk_searchbar_placeholder">Scan einen Strichcode</string>
+    
+    <!-- deprecated (2.1 GUI) -->
+    <string name="scanditsdk_title_message">Scan einen Strichcode</string>
+    <string name="scanditsdk_left_button_caption">TASTATUR</string>
+    <string name="scanditsdk_left_button_caption_when_keypad_visible">OK</string>
+    <string name="scanditsdk_right_button_caption">ABBRECHEN</string>
+    <string name="scanditsdk_right_button_caption_when_keypad_visible">ABBRECHEN</string>
+</resources>

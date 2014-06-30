@@ -1,1 +1,38 @@
-{"prepare_queue":{"installed":[],"uninstalled":[]},"config_munge":{"res/xml/config.xml":{"/*":{"<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>":1}},"AndroidManifest.xml":{"/*":{"<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />":1}}},"installed_plugins":{"org.apache.cordova.camera":{"PACKAGE_NAME":"org.wds.odl.mobile"}},"dependent_plugins":{}}
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "res/xml/config.xml": {
+            "/*": {
+                "<feature name=\"Camera\"><param name=\"android-package\" value=\"org.apache.cordova.camera.CameraLauncher\" /></feature>": 1
+            },
+            "/widget": {
+                "<feature name=\"ScanditSDK\"><param name=\"android-package\" value=\"com.mirasense.scanditsdk.plugin.ScanditSDK\" /></feature>": 1
+            }
+        },
+        "AndroidManifest.xml": {
+            "/*": {
+                "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />": 1
+            },
+            "/manifest": {
+                "<uses-permission android:name=\"android.permission.CAMERA\" />": 1,
+                "<uses-permission android:name=\"android.permission.VIBRATE\" />": 1,
+                "<uses-permission android:name=\"android.permission.INTERNET\" />": 1
+            },
+            "/manifest/application": {
+                "<activity android:name=\"com.mirasense.scanditsdk.plugin.ScanditSDKActivity\" />": 1
+            }
+        }
+    },
+    "installed_plugins": {
+        "org.apache.cordova.camera": {
+            "PACKAGE_NAME": "org.wds.odl.mobile"
+        },
+        "com.mirasense.scanditsdk.plugin": {
+            "PACKAGE_NAME": "org.wds.odl.mobile"
+        }
+    },
+    "dependent_plugins": {}
+}
