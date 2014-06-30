@@ -1,22 +1,17 @@
 describe('Ready Controller', function() {
 
-    var unit, rootScope;
+    var unit;
 
     beforeEach(angular.mock.module('odl'));
 
-    beforeEach(angular.mock.inject(function($rootScope, $controller) {
-        rootScope = $rootScope;
+    beforeEach(angular.mock.inject(function($rootScope, $controller) {        
         unit = $rootScope.$new();
         $controller('ReadyController', {$scope: unit});
     }));
 
-    it('should exist', function() {
-        expect(unit).not.toBeUndefined();
-    });
-
     it('should set the ready flag to true when the device is ready', function() {
         expect(unit.ready).toBeUndefined();
-        rootScope.$emit('cordovaReady');
+        helper.trigger(window.document, 'deviceready');
         expect(unit.ready).toBe(true);
     });
 });

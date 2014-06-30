@@ -4,21 +4,22 @@ describe('Cordova Service', function() {
 
     beforeEach(angular.mock.module('odl'));
 
-    beforeEach(inject(function ($rootScope, CordovaService) {
+    beforeEach(inject(function ($rootScope, cordovaService) {
         rootScope = $rootScope;
-        unit = CordovaService;
+        unit = cordovaService;
     }));
 
     afterEach(function() {
         unit.destroy();
     });
 
-    it('should exist', function() {
-        expect(unit).not.toBeUndefined();
+    it('should call the ready callback when the deviceready event is fired', function(done) {
+        unit.ready(done);
+        helper.trigger(window.document, 'deviceready');
     });
 
-    it('should fire a cordovaReady event when the deviceready event is fired', function(done) {
-        rootScope.$on('cordovaReady', done);
+    it('should call the ready callback after the event has been published', function(done) {        
         helper.trigger(window.document, 'deviceready');
+        unit.ready(done);
     });
 });

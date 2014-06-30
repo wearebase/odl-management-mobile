@@ -1,18 +1,27 @@
 var odl = angular.module('odl', ['ngRoute']);
-odl.service('CordovaService', function($rootScope) {
+odl.service('cordovaService', function($rootScope) {
+    var loaded = false;
+    var callback;
+
     var listener = function() {
-        $rootScope.$emit('cordovaReady');
+        loaded = true;
+        $rootScope.$apply(callback);
     };
     this.destroy = function() {
         document.removeEventListener('deviceready', listener, false);
     };
+    this.ready = function(cb) {        
+        if (loaded) {
+            cb();
+        } else {
+            callback = cb;
+        }
+    };
     document.addEventListener('deviceready', listener);
 });
-odl.controller('ReadyController', function($rootScope, $scope, $location, CordovaService) {
-    $rootScope.$on('cordovaReady', function() {
-        $scope.$apply(function() {
-            $scope.ready = true;
-        });
+odl.controller('ReadyController', function($rootScope, $scope, $location, cordovaService) {
+    cordovaService.ready(function() {    
+        $scope.ready = true;        
     });
 });
 // configure our routes

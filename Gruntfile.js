@@ -89,7 +89,7 @@
                 customTemplate: {
                     src: 'www/js/**/*.js',
                     options: {
-                        vendor: ['www/components/angular/angular.js', 'www/components/angular-mocks/angular-mocks.js'],
+                        vendor: ['www/components/angular/angular.js', 'www/components/angular-mocks/angular-mocks.js', 'www/components/angular-route/angular-route.js'],
                         specs: 'www/spec/tests/**/*.js',
                         helpers: 'www/spec/helpers/**/*.js'
                     }
