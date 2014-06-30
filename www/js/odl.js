@@ -1,4 +1,4 @@
-var odl = angular.module('odl', ['ngRoute']);
+var odl = angular.module('odl', ['ngRoute', 'ngAnimate']);
 odl.service('cordovaService', function($rootScope) {
     var loaded = false;
     var callback;
