@@ -29,7 +29,7 @@ odl.service('cordovaService', function($rootScope) {
 odl.service('serverService', function($http, $q, settings) {
     function handleResponse(response) { return response.data; }
     function handleError(error) { return $q.reject(error.data); }
-    
+
     this.getDevice = function(guid) {
         return $http.get(settings.api + '/device/' + guid).then(handleResponse, handleError);
     };
@@ -47,8 +47,8 @@ odl.controller('InfoController', function($scope, $cordovaBarcodeScanner, server
     }
 
     $cordovaBarcodeScanner.scan().then(function(imageData) {
-        $scope.guid = imageData;
-        serverService.getDevice(imageData).then(function(device) {
+        $scope.guid = imageData.text;
+        serverService.getDevice($scope.guid).then(function(device) {
             $scope.device = device;
         }, handleError);
     }, handleError);

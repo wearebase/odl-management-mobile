@@ -29,7 +29,7 @@ describe('Info Controller', function() {
 
         expect(unit.guid).toBeUndefined();
 
-        deferred.resolve('012345679'); $rootScope.$digest();
+        deferred.resolve({text: '012345679'}); $rootScope.$digest();
 
         expect(unit.guid).toBe('012345679');
         expect(scanner.scan).toHaveBeenCalled();
@@ -44,7 +44,7 @@ describe('Info Controller', function() {
 
         expect(unit.guid).toBeUndefined();
 
-        scannerDeferred.resolve('012345679');
+        scannerDeferred.resolve({text: '012345679'});
         serverDeferred.resolve({name: 'iphone'});
         $rootScope.$digest();
 
@@ -77,7 +77,7 @@ describe('Info Controller', function() {
 
         expect(unit.error).toBeUndefined();
         
-        scannerDeferred.resolve('012345679');
+        scannerDeferred.resolve({text: '012345679'});
         serverDeferred.reject('Some error');
         $rootScope.$digest();
 
