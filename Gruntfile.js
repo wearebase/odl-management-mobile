@@ -202,6 +202,36 @@
             'cordova-serve'
         ]);
 
+        grunt.registerTask('cordova-platforms', 'Cordova platforms tasks', function () {
+            var done = this.async();
+            cordova.platform('add', 'android');
+            done();
+        });
+
+        grunt.registerTask('cordova-plugins', 'Cordova plugins tasks', function () {
+            var done = this.async();
+
+            function addPlugins(plugins, done) {
+                if (plugins.length) {
+                    var plugin = plugins.shift();
+                    cordova.plugin('add', plugin, function() {
+                        addPlugins(plugins, done);
+                    });
+                } else {
+                    done();
+                }
+            }
+
+            addPlugins([
+                'org.apache.cordova.camera',
+                'org.apache.cordova.device',
+                'https://github.com/wildabeast/BarcodeScanner.git',
+                'org.apache.cordova.network-information'
+            ], done);
+        });
+
+        grunt.registerTask('cordova-install', ['cordova-platforms', 'cordova-plugins']);
+
         grunt.registerTask('serve', ['cordova-prepareserve', 'watch:liveserve']);
         grunt.registerTask('ripple', ['cordova-prepare', 'cordova-ripple', 'watch:liveripple']);
 
@@ -211,7 +241,10 @@
         grunt.registerTask('device', ['cordova-buildrun']);
         grunt.registerTask('live-device', ['cordova-buildrun', 'watch:livedevice']);
 
-        grunt.registerTask('default', ['travis']);
-        grunt.registerTask('travis', ['jshint','jasmine']);
+        grunt.registerTask('install', ['bower-install-simple', 'cordova-install']);
+
+        grunt.registerTask('test', ['jshint', 'jasmine']);
+
+        grunt.registerTask('default', ['test']);
     };
 }());
