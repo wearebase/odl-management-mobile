@@ -35,7 +35,7 @@ describe('Info Controller', function() {
         expect(scanner.scan).toHaveBeenCalled();
     }));
 
-    it('should get device data when getServiceData is called', angular.mock.inject(function($controller, $q, $rootScope) {
+    it('should set device data when retrieved from the server', angular.mock.inject(function($controller, $q, $rootScope) {
         var scannerDeferred = $q.defer(), serverDeferred = $q.defer();
         var scanner = createScannerMock(scannerDeferred);
         var server = createServerMock(serverDeferred);
@@ -43,13 +43,45 @@ describe('Info Controller', function() {
         $controller('InfoController', {$scope: unit, $cordovaBarcodeScanner: scanner, serverService: server});
 
         expect(unit.guid).toBeUndefined();
-        
+
         scannerDeferred.resolve('012345679');
         serverDeferred.resolve({name: 'iphone'});
         $rootScope.$digest();
 
         expect(unit.device).toEqual({name: 'iphone'});
         expect(server.getDevice).toHaveBeenCalledWith('012345679');
+    }));
+
+    it('should set the error string if something goes wrong scanning', angular.mock.inject(function($controller, $q, $rootScope) {
+        var scannerDeferred = $q.defer(), serverDeferred = $q.defer();
+        var scanner = createScannerMock(scannerDeferred);
+        var server = createServerMock(serverDeferred);
+
+        $controller('InfoController', {$scope: unit, $cordovaBarcodeScanner: scanner, serverService: server});
+
+        expect(unit.error).toBeUndefined();
+        
+        scannerDeferred.reject('Some error');
+        $rootScope.$digest();
+
+        expect(unit.error).toEqual('Some error');
+        expect(server.getDevice).not.toHaveBeenCalled();
+    }));
+
+    it('should set the error string if something goes wrong fetching the device', angular.mock.inject(function($controller, $q, $rootScope) {
+        var scannerDeferred = $q.defer(), serverDeferred = $q.defer();
+        var scanner = createScannerMock(scannerDeferred);
+        var server = createServerMock(serverDeferred);
+
+        $controller('InfoController', {$scope: unit, $cordovaBarcodeScanner: scanner, serverService: server});
+
+        expect(unit.error).toBeUndefined();
+        
+        scannerDeferred.resolve('012345679');
+        serverDeferred.reject('Some error');
+        $rootScope.$digest();
+
+        expect(unit.error).toEqual('Some error');        
     }));
 
 });

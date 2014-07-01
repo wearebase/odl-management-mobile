@@ -131,6 +131,11 @@ li.name h1 {
     margin-bottom: 0;
 }
 
+img {
+    margin-top: 1rem;
+    width: 50%;
+}
+
 footer {
     background-color: #f2f2f2;    
     color: #999999;

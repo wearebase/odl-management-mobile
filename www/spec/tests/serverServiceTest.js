@@ -13,17 +13,17 @@ describe('Server Service', function() {
 
     it('should retrieve a device given the encoded GUID', function() {
         var promise = jasmine.createSpyObj('promise', ['ok', 'error']);
-        unit.getDevice('0000').success(promise.ok).error(promise.error);
+        unit.getDevice('0000').then(promise.ok, promise.error);
         httpBackend.flush();
-        expect(promise.ok).toHaveBeenCalledWith({name: 'MOTO G'}, 200, jasmine.any(Function), jasmine.any(Object));
+        expect(promise.ok).toHaveBeenCalledWith({name: 'MOTO G'});
         expect(promise.error).not.toHaveBeenCalled();
     });
 
     it('should call the error function if we get an error from the server', function() {
         var promise = jasmine.createSpyObj('promise', ['ok', 'error']);
-        unit.getDevice('0001').success(promise.ok).error(promise.error);
+        unit.getDevice('0001').then(promise.ok, promise.error);
         httpBackend.flush();
-        expect(promise.error).toHaveBeenCalledWith('Device not found', 404, jasmine.any(Function), jasmine.any(Object));
+        expect(promise.error).toHaveBeenCalledWith('Device not found');
         expect(promise.ok).not.toHaveBeenCalled();
     });
 });

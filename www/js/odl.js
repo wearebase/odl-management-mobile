@@ -27,12 +27,14 @@ odl.service('cordovaService', function($rootScope) {
 });
 
 odl.service('serverService', function($http, $q, settings) {
+    function handleResponse(response) { return response.data; }
+    function handleError(error) { return $q.reject(error.data); }
+    
     this.getDevice = function(guid) {
-        return $http.get(settings.api + '/device/' + guid);
+        return $http.get(settings.api + '/device/' + guid).then(handleResponse, handleError);
     };
 });
 
-//////////// Controllers
 odl.controller('ReadyController', function($scope, cordovaService) {
     cordovaService.ready(function() {
         $scope.ready = true;
@@ -40,16 +42,18 @@ odl.controller('ReadyController', function($scope, cordovaService) {
 });
 
 odl.controller('InfoController', function($scope, $cordovaBarcodeScanner, serverService) {
+    function handleError(error) {
+        $scope.error = error;
+    }
+
     $cordovaBarcodeScanner.scan().then(function(imageData) {
         $scope.guid = imageData;
         serverService.getDevice(imageData).then(function(device) {
             $scope.device = device;
-        });
-    }, function(err) {
-    });
+        }, handleError);
+    }, handleError);
 });
 
-// configure our routes
 odl.config(function($routeProvider) {
     $routeProvider
     .when('/', {
