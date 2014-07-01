@@ -1,4 +1,10 @@
-var odl = angular.module('odl', ['ngRoute', 'ngAnimate', 'ngCordova']);
+angular.module('config', [])
+.constant('settings', {
+    api: 'http://odl-uat.herokuapp.com/api'
+});
+
+var odl = angular.module('odl', ['config', 'ngRoute', 'ngAnimate', 'ngCordova']);
+
 odl.service('cordovaService', function($rootScope) {
     var loaded = false;
     var callback;
@@ -20,9 +26,9 @@ odl.service('cordovaService', function($rootScope) {
     document.addEventListener('deviceready', listener);
 });
 
-odl.service('serverService', function($q) {
-    this.getDevice = function() {
-        return $http.get('http://odl-uat.herokuapp.com/api/device');
+odl.service('serverService', function($http, $q, settings) {
+    this.getDevice = function(guid) {
+        return $http.get(settings.api + '/device/' + guid);
     };
 });
 
