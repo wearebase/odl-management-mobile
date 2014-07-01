@@ -1,3 +1,0 @@
-
-Changelog has been replaced with RELEASE_NOTES file in the top-level directory of the Scandit SDK. 
-

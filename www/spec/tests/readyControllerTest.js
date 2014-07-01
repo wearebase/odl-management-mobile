@@ -2,9 +2,9 @@ describe('Ready Controller', function() {
 
     var unit;
 
-    beforeEach(angular.mock.module('odl'));
+    beforeEach(module('odl'));
 
-    beforeEach(angular.mock.inject(function($rootScope, $controller) {        
+    beforeEach(angular.mock.inject(function($rootScope, $controller) {
         unit = $rootScope.$new();
         $controller('ReadyController', {$scope: unit});
     }));
@@ -14,4 +14,5 @@ describe('Ready Controller', function() {
         helper.trigger(window.document, 'deviceready');
         expect(unit.ready).toBe(true);
     });
+
 });

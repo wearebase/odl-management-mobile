@@ -1,4 +1,4 @@
-var odl = angular.module('odl', ['ngRoute', 'ngAnimate']);
+var odl = angular.module('odl', ['ngRoute', 'ngAnimate', 'ngCordova']);
 odl.service('cordovaService', function($rootScope) {
     var loaded = false;
     var callback;
@@ -10,7 +10,7 @@ odl.service('cordovaService', function($rootScope) {
     this.destroy = function() {
         document.removeEventListener('deviceready', listener, false);
     };
-    this.ready = function(cb) {        
+    this.ready = function(cb) {
         if (loaded) {
             cb();
         } else {
@@ -19,11 +19,30 @@ odl.service('cordovaService', function($rootScope) {
     };
     document.addEventListener('deviceready', listener);
 });
-odl.controller('ReadyController', function($rootScope, $scope, $location, cordovaService) {
-    cordovaService.ready(function() {    
-        $scope.ready = true;        
+
+odl.service('serverService', function($q) {
+    this.getDevice = function() {
+        return $q.defer().promise;
+    };
+});
+
+//////////// Controllers
+odl.controller('ReadyController', function($scope, cordovaService) {
+    cordovaService.ready(function() {
+        $scope.ready = true;
     });
 });
+
+odl.controller('InfoController', function($scope, $cordovaBarcodeScanner, serverService) {
+    $cordovaBarcodeScanner.scan().then(function(imageData) {
+        $scope.guid = imageData;
+        serverService.getDevice(imageData).then(function(device) {
+            $scope.device = device;
+        });
+    }, function(err) {
+    });
+});
+
 // configure our routes
 odl.config(function($routeProvider) {
     $routeProvider
@@ -33,8 +52,8 @@ odl.config(function($routeProvider) {
     })
     .when('/info', {
         templateUrl: 'pages/info.html',
-        controller: 'ReadyController'
-    })    
+        controller: 'InfoController'
+    })
     .when('/add', {
         templateUrl: 'pages/add.html',
         controller: 'ReadyController'

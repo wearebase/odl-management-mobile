@@ -2,7 +2,7 @@ describe('Cordova Service', function() {
 
     var unit, rootScope;
 
-    beforeEach(angular.mock.module('odl'));
+    beforeEach(module('odl'));
 
     beforeEach(inject(function ($rootScope, cordovaService) {
         rootScope = $rootScope;
@@ -18,7 +18,7 @@ describe('Cordova Service', function() {
         helper.trigger(window.document, 'deviceready');
     });
 
-    it('should call the ready callback after the event has been published', function(done) {        
+    it('should call the ready callback after the event has been published', function(done) {
         helper.trigger(window.document, 'deviceready');
         unit.ready(done);
     });
