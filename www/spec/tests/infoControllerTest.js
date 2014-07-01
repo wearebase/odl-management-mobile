@@ -11,16 +11,23 @@ describe('Info Controller', function() {
     var createScannerMock = function(deferred) {
         var scanner = jasmine.createSpyObj('scanner', ['scan']);
         scanner.scan.and.returnValue(deferred.promise);
-
         return scanner;
+    };
+
+    var createServerMock = function(deferred) {
+        var server = jasmine.createSpyObj('server', ['getDevice']);
+        server.getDevice.and.returnValue(deferred.promise);
+        return server;
     };
 
     it('should get GUID code from barcode scanner service', angular.mock.inject(function($controller, $q, $rootScope) {
         var deferred = $q.defer();
         var scanner = createScannerMock(deferred);
-        expect(unit.guid).toBeUndefined();
+        var server = createServerMock($q.defer());
 
-        $controller('InfoController', {$scope: unit, $cordovaBarcodeScanner: scanner});
+        $controller('InfoController', {$scope: unit, $cordovaBarcodeScanner: scanner, serverService: server});
+
+        expect(unit.guid).toBeUndefined();
 
         deferred.resolve('012345679'); $rootScope.$digest();
 
@@ -29,20 +36,17 @@ describe('Info Controller', function() {
     }));
 
     it('should get device data when getServiceData is called', angular.mock.inject(function($controller, $q, $rootScope) {
-        var scannerDeferred = $q.defer();
+        var scannerDeferred = $q.defer(), serverDeferred = $q.defer();
         var scanner = createScannerMock(scannerDeferred);
-
-        var deferred = $q.defer();
-
-        var server = jasmine.createSpyObj('server', ['getDevice']);
-        server.getDevice.and.returnValue(deferred.promise);
-
-        expect(unit.guid).toBeUndefined();
+        var server = createServerMock(serverDeferred);
 
         $controller('InfoController', {$scope: unit, $cordovaBarcodeScanner: scanner, serverService: server});
 
+        expect(unit.guid).toBeUndefined();
+        
         scannerDeferred.resolve('012345679');
-        deferred.resolve({name: 'iphone'}); $rootScope.$digest();
+        serverDeferred.resolve({name: 'iphone'});
+        $rootScope.$digest();
 
         expect(unit.device).toEqual({name: 'iphone'});
         expect(server.getDevice).toHaveBeenCalledWith('012345679');

@@ -22,7 +22,7 @@ odl.service('cordovaService', function($rootScope) {
 
 odl.service('serverService', function($q) {
     this.getDevice = function() {
-        return $q.defer().promise;
+        return $http.get('http://odl-uat.herokuapp.com/api/device');
     };
 });
 
