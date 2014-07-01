@@ -4,4 +4,4 @@ node_js:
 notifications:
   slack: odl:vToYX9UxvZZxDNtSXYG6UzCT
 before_install: npm install -g grunt-cli
-install: npm install && grunt install
+install: npm install && grunt bower-install-simple
