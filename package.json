@@ -12,6 +12,6 @@
     "matchdep": "~0.1.1"
   },
   "scripts": {
-    "test": "grunt travis --verbose"
+    "test": "grunt"
   }
 }
