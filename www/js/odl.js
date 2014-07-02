@@ -54,6 +54,16 @@ odl.controller('InfoController', function($scope, $cordovaBarcodeScanner, server
     }, handleError);
 });
 
+odl.controller('AddController', function($scope, $cordovaBarcodeScanner, serverService) {
+    function handleError(error) {
+        $scope.error = error;
+    }
+
+    $cordovaBarcodeScanner.scan().then(function(imageData) {
+        $scope.guid = imageData.text;
+    }, handleError);
+});
+
 odl.config(function($routeProvider) {
     $routeProvider
     .when('/', {
@@ -66,7 +76,7 @@ odl.config(function($routeProvider) {
     })
     .when('/add', {
         templateUrl: 'pages/add.html',
-        controller: 'ReadyController'
+        controller: 'AddController'
     })
     .when('/checkin', {
         templateUrl: 'pages/checkin.html',
