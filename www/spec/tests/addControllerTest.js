@@ -15,8 +15,8 @@ describe('Add Device Controller', function() {
     };
 
     var createServerMock = function(deferred) {
-        var server = jasmine.createSpyObj('server', ['addDevice','getDevice']);
-        server.getDevice.and.returnValue(deferred.promise);
+        var server = jasmine.createSpyObj('server', ['addDevice']);
+        server.addDevice.and.returnValue(deferred.promise);
         return server;
     };
 
@@ -33,6 +33,25 @@ describe('Add Device Controller', function() {
 
         expect(unit.guid).toBe('012345679');
         expect(scanner.scan).toHaveBeenCalled();
+    }));
+
+    it('should send an add device request', angular.mock.inject(function($controller, $q, $rootScope) {
+        var deferred = $q.defer();
+        var server = createServerMock(deferred);
+
+        unit.guid = '123456';
+        unit.imei = 'imei number';
+        unit.ukNumber = 'UK000';
+
+        $controller('AddController', {$scope: unit, $cordovaBarcodeScanner: createScannerMock($q.defer()), serverService: server});
+
+        unit.addDevice();
+        expect(server.addDevice).toHaveBeenCalledWith('123456', 'imei number', 'UK000');
+
+        expect(unit.device).toBeUndefined();
+        deferred.resolve({name: 'iphone'});
+        $rootScope.$digest();
+        expect(unit.device).toEqual({name: 'iphone'});
     }));
 
 });

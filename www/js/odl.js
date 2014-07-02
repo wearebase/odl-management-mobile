@@ -33,6 +33,10 @@ odl.service('serverService', function($http, $q, settings) {
     this.getDevice = function(guid) {
         return $http.get(settings.api + '/device/' + guid).then(handleResponse, handleError);
     };
+
+    this.addDevice = function(guid, imei, humanId) {
+        return $http.post(settings.api + '/device').then(handleResponse, handleError);
+    };
 });
 
 odl.controller('ReadyController', function($scope, cordovaService) {
@@ -58,6 +62,12 @@ odl.controller('AddController', function($scope, $cordovaBarcodeScanner, serverS
     function handleError(error) {
         $scope.error = error;
     }
+
+    $scope.addDevice = function() {
+        serverService.addDevice($scope.guid, $scope.imei, $scope.ukNumber).then(function(device){
+            $scope.device = device;
+        }, handleError);
+    };
 
     $cordovaBarcodeScanner.scan().then(function(imageData) {
         $scope.guid = imageData.text;
