@@ -64,7 +64,7 @@
 @keyframes slideOutLeft {
     to      { transform: translateX(-100%); }
 }
-@-moz-keyframes slideOutLeft {  
+@-moz-keyframes slideOutLeft {
     to      { -moz-transform: translateX(-100%); }
 }
 @-webkit-keyframes slideOutLeft {
@@ -85,9 +85,9 @@
 .ng-leave {
     -webkit-animation:slideOutLeft 0.5s both ease-in;
     -moz-animation:slideOutLeft 0.5s both ease-in;
-    animation:slideOutLeft 0.5s both ease-in;   
+    animation:slideOutLeft 0.5s both ease-in;
 }
-.ng-enter {  
+.ng-enter {
     -webkit-animation:slideInRight 0.5s both ease-in;
     -moz-animation:slideInRight 0.5s both ease-in;
     animation:s
@@ -97,10 +97,10 @@ li.name {
     background-image: url('http://www.wds.co/wp-content/uploads/2013/10/xer_wds_cmyk_neg.png');
     background-size: 3rem;
     background-repeat: no-repeat;
-    background-position: 1rem;    
+    background-position: 1rem;
 }
 
-li.name h1 {    
+li.name h1 {
     color: white;
 }
 
@@ -114,33 +114,39 @@ li.name h1 {
     margin-bottom: 1rem;
 }
 
-.actions .button {    
+.actions .button {
     height: 10rem;
     text-transform: capitalize;
 }
 
-.actions .button i {    
+.actions .button i {
     display: block;
     font-size: 4rem;
     height: 6.5rem;
     padding-top: 1.5rem;
 }
 
-.actions {        
+.actions {
     padding-bottom: 0;
     margin-bottom: 0;
 }
 
-img {
+.device-info {
     margin-top: 1rem;
-    width: 50%;
+    margin-bottom: 1rem;
+    width: 80%;
+}
+
+table {
+    width: 100%;
+    margin: 0 auto 0 auto;
 }
 
 footer {
-    background-color: #f2f2f2;    
+    background-color: #f2f2f2;
     color: #999999;
     text-align: center;
-    margin: 0 auto 0 auto;    
+    margin: 0 auto 0 auto;
     font-size: 0.8rem;
     border-top: solid 1px #dddddd;
     margin-top: 1rem;

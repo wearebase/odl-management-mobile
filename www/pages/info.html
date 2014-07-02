@@ -1,12 +1,43 @@
 <div ng-show="error" data-alert class="alert-box alert">
-  <strong>We are sorry: </strong>
-  {{error}}
-  <a href="#" class="close">&times;</a>
+    <strong>We are sorry: </strong>
+    {{error}}
+    <a href="#" class="close">&times;</a>
 </div>
 
-<div ng-show="device">    
-    <h3><i class="fa fa-mobile"></i> {{device.brand}} - {{device.name}}</h3>
-    <div class="text-center">
-        <img ng-src="{{device.image}}">    
+<div ng-show="device">
+    <h3><i class="fa fa-mobile"></i> Device Information</h3>
+    <div class="device-info row">
+    	<div class="small-4 columns">
+    		<img ng-src="{{device.image}}">
+    	</div>
+    	<div class="small-8 columns">
+    		<div class="row">
+    			<h4 class="small-4 columns subheader text-right">Brand:</h4>
+    			<h4 class="small-8 columns">{{device.brand}}</h4>
+    		</div>
+    		<div class="row">
+    			<h4 class="small-4 columns subheader text-right">Model:</h4>
+    			<h4 class="small-8 columns">{{device.name}}</h4>
+    		</div>
+    		<div class="row">
+    			<h4 class="small-4 columns subheader text-right">IMEI:</h4>
+    			<h4 class="small-8 columns">{{device.imei}}</h4>
+    		</div>
+    	</div>
     </div>
+    <h3><i class="fa fa-info"></i> Attributes</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="attribute in device.attributes">
+                <td>{{attribute.name}}</td>
+                <td>{{attribute.value}}</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
