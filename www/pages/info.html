@@ -1,11 +1,12 @@
+<h3><i class="fa fa-mobile"></i> Device Information</h3>
+
 <div ng-show="error" data-alert class="alert-box alert">
     <strong>We are sorry: </strong>
     {{error}}
-    <a href="#" class="close">&times;</a>
+    <a href="" class="close">&times;</a>
 </div>
 
 <div ng-show="device">
-    <h3><i class="fa fa-mobile"></i> Device Information</h3>
     <div class="device-info row">
     	<div class="small-4 columns">
     		<img ng-src="{{device.image}}">

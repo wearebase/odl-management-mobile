@@ -64,7 +64,7 @@ odl.controller('AddController', function($scope, $cordovaBarcodeScanner, serverS
     }
 
     $scope.addDevice = function() {
-        serverService.addDevice($scope.guid, $scope.imei, $scope.ukNumber).then(function(device){
+        serverService.addDevice($scope.guid, $scope.imei, $scope.humanId).then(function(device){
             $scope.device = device;
         }, handleError);
     };

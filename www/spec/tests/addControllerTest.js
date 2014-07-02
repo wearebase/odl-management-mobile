@@ -41,7 +41,7 @@ describe('Add Device Controller', function() {
 
         unit.guid = '123456';
         unit.imei = 'imei number';
-        unit.ukNumber = 'UK000';
+        unit.humanId = 'UK000';
 
         $controller('AddController', {$scope: unit, $cordovaBarcodeScanner: createScannerMock($q.defer()), serverService: server});
 
