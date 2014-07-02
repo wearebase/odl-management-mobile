@@ -35,7 +35,7 @@ odl.service('serverService', function($http, $q, settings) {
     };
 
     this.addDevice = function(guid, imei, humanId) {
-        return $http.post(settings.api + '/device').then(handleResponse, handleError);
+        return $http.post(settings.api + '/device', {guid: guid, imei: imei, humanId: humanId}).then(handleResponse, handleError);
     };
 });
 
