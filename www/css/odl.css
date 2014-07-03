@@ -142,6 +142,13 @@ table {
     margin: 0 auto 0 auto;
 }
 
+table td {
+    max-width: 1px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 footer {
     background-color: #f2f2f2;
     color: #999999;
