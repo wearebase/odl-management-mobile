@@ -11,13 +11,13 @@
 </div>
 
 <div ng-show="guid && !device">
-	<h6>GUID:</h6>
+	<h6><i class="fa fa-qrcode"></i> GUID:</h6>
 	<div class="panel text-center">{{guid}}</div>
-	<h6>IMEI:</h6>
+	<h6><i class="fa fa-credit-card"></i> IMEI:</h6>
 	<input type="text" ng-model="imei" placeholder="Insert device IMEI" />
-	<h6>UK Number:</h6>
+	<h6><i class="fa fa-tag"></i> UK Number:</h6>
 	<input type="text" ng-model="humanId" placeholder="Insert Number on the QR code side" />
-	<button ng-disabled="!imei || !humanId" ng-click="addDevice()">Add</button>
+	<button ng-disabled="!imei || !humanId" ng-click="addDevice()"><i class="fa fa-upload"></i> Register device</button>
 </div>
 
 <div ng-show="device">
