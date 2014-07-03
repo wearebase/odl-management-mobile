@@ -84,4 +84,20 @@ describe('Info Controller', function() {
         expect(unit.error).toEqual('Some error');        
     }));
 
+    it('should go back to the root if the scan is cancelled', angular.mock.inject(function($controller, $q, $rootScope, $location) {
+        var scannerDeferred = $q.defer();
+        var scanner = createScannerMock(scannerDeferred);
+        var server = createServerMock($q.defer());
+
+        expect($location.url()).toBe('');
+
+        $controller('InfoController', {$scope: unit, $cordovaBarcodeScanner: scanner, serverService: server});
+        
+        scannerDeferred.resolve({cancelled: true});        
+        $rootScope.$digest();
+
+        expect($location.url()).toBe('/'); 
+        expect(server.getDevice).not.toHaveBeenCalled();
+    }));
+
 });

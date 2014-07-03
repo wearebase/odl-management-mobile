@@ -45,20 +45,24 @@ odl.controller('ReadyController', function($scope, cordovaService) {
     });
 });
 
-odl.controller('InfoController', function($scope, $cordovaBarcodeScanner, serverService) {
+odl.controller('InfoController', function($scope, $location, $cordovaBarcodeScanner, serverService) {
     function handleError(error) {
         $scope.error = error;
     }
 
     $cordovaBarcodeScanner.scan().then(function(imageData) {
-        $scope.guid = imageData.text;
-        serverService.getDevice($scope.guid).then(function(device) {
-            $scope.device = device;
-        }, handleError);
+        if (imageData.cancelled) {
+            $location.url('/');
+        } else {
+            $scope.guid = imageData.text;
+            serverService.getDevice($scope.guid).then(function(device) {
+                $scope.device = device;
+            }, handleError);
+        }
     }, handleError);
 });
 
-odl.controller('AddController', function($scope, $cordovaBarcodeScanner, serverService) {
+odl.controller('AddController', function($scope, $location, $cordovaBarcodeScanner, serverService) {
     function handleError(error) {
         $scope.error = error;
     }
@@ -70,7 +74,11 @@ odl.controller('AddController', function($scope, $cordovaBarcodeScanner, serverS
     };
 
     $cordovaBarcodeScanner.scan().then(function(imageData) {
-        $scope.guid = imageData.text;
+        if (imageData.cancelled) {
+            $location.url('/');
+        } else {
+            $scope.guid = imageData.text;
+        }
     }, handleError);
 });
 
