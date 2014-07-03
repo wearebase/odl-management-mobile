@@ -27,6 +27,7 @@ describe('Add Device Controller', function() {
 
         $controller('AddController', {$scope: unit, $cordovaBarcodeScanner: scanner, serverService: server});
 
+        expect(unit.device).toBeUndefined();
         expect(unit.guid).toBeUndefined();
 
         deferred.resolve({text: '012345679'}); $rootScope.$digest();
@@ -39,12 +40,12 @@ describe('Add Device Controller', function() {
         var deferred = $q.defer();
         var server = createServerMock(deferred);
 
+        $controller('AddController', {$scope: unit, $cordovaBarcodeScanner: createScannerMock($q.defer()), serverService: server});
+
         unit.guid = '123456';
         unit.imei = 'imei number';
         unit.humanId = 'UK000';
-
-        $controller('AddController', {$scope: unit, $cordovaBarcodeScanner: createScannerMock($q.defer()), serverService: server});
-
+        
         unit.addDevice();
         expect(server.addDevice).toHaveBeenCalledWith('123456', 'imei number', 'UK000');
 
@@ -65,6 +66,21 @@ describe('Add Device Controller', function() {
         $rootScope.$digest();
 
         expect(server.addDevice).not.toHaveBeenCalled();
+    }));
+
+    it('should clear the scope at startup', angular.mock.inject(function($controller, $q, $rootScope) {
+        var scanner = createScannerMock($q.defer());
+        var server = createServerMock($q.defer());
+
+        unit.device = {};
+        unit.error = "";
+        unit.guid = "";
+
+        $controller('AddController', {$scope: unit, $cordovaBarcodeScanner: scanner, serverService: server});
+        
+        expect(unit.device).toBeUndefined();
+        expect(unit.guid).toBeUndefined();
+        expect(unit.error).toBeUndefined();
     }));
 
 });

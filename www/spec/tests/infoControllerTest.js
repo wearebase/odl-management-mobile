@@ -93,8 +93,23 @@ describe('Info Controller', function() {
         
         scannerDeferred.resolve({cancelled: true});        
         $rootScope.$digest();
-                
+
         expect(server.getDevice).not.toHaveBeenCalled();
+    }));
+
+     it('should clear the scope at startup', angular.mock.inject(function($controller, $q, $rootScope) {
+        var scanner = createScannerMock($q.defer());
+        var server = createServerMock($q.defer());
+
+        unit.device = {};
+        unit.error = "";
+        unit.guid = "";
+
+        $controller('InfoController', {$scope: unit, $cordovaBarcodeScanner: scanner, serverService: server});
+        
+        expect(unit.device).toBeUndefined();
+        expect(unit.guid).toBeUndefined();
+        expect(unit.error).toBeUndefined();
     }));
 
 });

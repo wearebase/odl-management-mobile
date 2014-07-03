@@ -6,43 +6,10 @@
         {{error}}
         <a href="" class="close">&times;</a>
     </div>
-    <a class="button" ng-click="start()"><i class="fa fa-repeat"></i> Try again</a>
+    <a class="button success" ng-click="start()"><i class="fa fa-repeat"></i> Try again</a>
     <a class="button" href="#"><i class="fa fa-arrow-left"></i> Go back</a>    
 </div>
 
-<div ng-show="device">
-    <div class="device-info row">
-    	<div class="small-4 columns">
-    		<img ng-src="{{device.image}}">
-    	</div>
-    	<div class="small-8 columns">
-    		<div class="row">
-    			<h4 class="small-4 columns subheader text-right">Brand:</h4>
-    			<h4 class="small-8 columns">{{device.brand}}</h4>
-    		</div>
-    		<div class="row">
-    			<h4 class="small-4 columns subheader text-right">Model:</h4>
-    			<h4 class="small-8 columns">{{device.name}}</h4>
-    		</div>
-    		<div class="row">
-    			<h4 class="small-4 columns subheader text-right">IMEI:</h4>
-    			<h4 class="small-8 columns">{{device.imei}}</h4>
-    		</div>
-    	</div>
-    </div>
-    <h3><i class="fa fa-info"></i> Attributes</h3>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Value</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="attribute in device.attributes">
-                <td>{{attribute.name}}</td>
-                <td>{{attribute.value}}</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<div ng-show="device" ng-include="'pages/device.html'"></div>
+
+<script>$(document).foundation();</script>

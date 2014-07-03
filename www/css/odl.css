@@ -82,7 +82,7 @@
     to { transform: translateZ(-3000px) rotateZ(360deg); opacity: 0; }
 }
 
-.ng-leave {
+/*.ng-leave {
     -webkit-animation:slideOutLeft 0.5s both ease-in;
     -moz-animation:slideOutLeft 0.5s both ease-in;
     animation:slideOutLeft 0.5s both ease-in;
@@ -91,7 +91,7 @@
     -webkit-animation:slideInRight 0.5s both ease-in;
     -moz-animation:slideInRight 0.5s both ease-in;
     animation:s
-}
+}*/
 
 li.name {
     background-image: url('../img/wds.png');
@@ -107,6 +107,7 @@ li.name h1 {
 .app {
     padding: 20px;
     padding-bottom: 0;
+    margin-bottom: 3.2rem;
 }
 
 .app h3 {
