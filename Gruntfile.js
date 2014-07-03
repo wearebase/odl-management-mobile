@@ -226,7 +226,8 @@
                 'org.apache.cordova.camera',
                 'org.apache.cordova.device',
                 'https://github.com/wildabeast/BarcodeScanner.git',
-                'org.apache.cordova.network-information'
+                'org.apache.cordova.network-information',
+		'org.apache.cordova.inappbrowser'
             ], done);
         });
 
