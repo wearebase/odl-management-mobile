@@ -1,9 +1,13 @@
 <h3><i class="fa fa-mobile"></i> Device Information</h3>
 
-<div ng-show="error" data-alert class="alert-box alert">
-    <strong>We are sorry: </strong>
-    {{error}}
-    <a href="" class="close">&times;</a>
+<div ng-show="error">
+    <div data-alert class="alert-box alert">
+        <strong>We are sorry: </strong>
+        {{error}}
+        <a href="" class="close">&times;</a>
+    </div>
+    <a class="button" ng-click="start()"><i class="fa fa-repeat"></i> Try again</a>
+    <a class="button" href="#"><i class="fa fa-arrow-left"></i> Go back</a>    
 </div>
 
 <div ng-show="device">
