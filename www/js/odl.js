@@ -49,11 +49,9 @@ odl.controller('InfoController', function($scope, $location, $cordovaBarcodeScan
     function handleError(error) {
         $scope.error = error;
     }
-
+    
     $cordovaBarcodeScanner.scan().then(function(imageData) {
-        if (imageData.cancelled) {
-            $location.url('/');
-        } else {
+        if (!imageData.cancelled) {            
             $scope.guid = imageData.text;
             serverService.getDevice($scope.guid).then(function(device) {
                 $scope.device = device;
@@ -74,9 +72,7 @@ odl.controller('AddController', function($scope, $location, $cordovaBarcodeScann
     };
 
     $cordovaBarcodeScanner.scan().then(function(imageData) {
-        if (imageData.cancelled) {
-            $location.url('/');
-        } else {
+        if (!imageData.cancelled) {            
             $scope.guid = imageData.text;
         }
     }, handleError);

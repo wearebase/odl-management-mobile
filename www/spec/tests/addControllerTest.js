@@ -54,19 +54,16 @@ describe('Add Device Controller', function() {
         expect(unit.device).toEqual({name: 'iphone'});
     }));
 
-    it('should go back to the root if the scan is cancelled', angular.mock.inject(function($controller, $q, $rootScope, $location) {
+    it('should do nothing if the scan is cancelled', angular.mock.inject(function($controller, $q, $rootScope) {
         var scannerDeferred = $q.defer();
         var scanner = createScannerMock(scannerDeferred);
         var server = createServerMock($q.defer());
-
-        expect($location.url()).toBe('');
 
         $controller('AddController', {$scope: unit, $cordovaBarcodeScanner: scanner, serverService: server});
         
         scannerDeferred.resolve({cancelled: true});        
         $rootScope.$digest();
 
-        expect($location.url()).toBe('/'); 
         expect(server.addDevice).not.toHaveBeenCalled();
     }));
 
