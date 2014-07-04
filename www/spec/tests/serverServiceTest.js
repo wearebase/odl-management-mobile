@@ -35,4 +35,22 @@ describe('Server Service', function() {
         expect(promise.ok).toHaveBeenCalledWith({name: 'MOTO G', guid: '0000'});
         expect(promise.error).not.toHaveBeenCalled();
     });
+
+    it('should retrieve a device given the encoded GUID and calling to checkin device', function(){
+        httpBackend.expect('POST', 'http://odl-uat.herokuapp.com/api/check/in/0000').respond({name: 'MOTO G', guid: '0000', checkin: true});
+        var promise = jasmine.createSpyObj('promise', ['ok', 'error']);
+        unit.checkin('0000').then(promise.ok, promise.error);
+        httpBackend.flush();
+        expect(promise.ok).toHaveBeenCalledWith({name: 'MOTO G', guid: '0000', checkin: true});
+        expect(promise.error).not.toHaveBeenCalled();
+    });
+
+    it('should retrieve a device given the encoded GUID and calling to checkout device', function(){
+        httpBackend.expect('POST', 'http://odl-uat.herokuapp.com/api/check/out/0000').respond({name: 'MOTO G', guid: '0000', checkin: false});
+        var promise = jasmine.createSpyObj('promise', ['ok', 'error']);
+        unit.checkout('0000').then(promise.ok, promise.error);
+        httpBackend.flush();
+        expect(promise.ok).toHaveBeenCalledWith({name: 'MOTO G', guid: '0000', checkin: false});
+        expect(promise.error).not.toHaveBeenCalled();
+    });
 });

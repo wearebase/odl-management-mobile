@@ -37,6 +37,14 @@ odl.service('serverService', function($http, $q, settings) {
     this.addDevice = function(guid, imei, humanId) {
         return $http.post(settings.api + '/device', {guid: guid, imei: imei, humanId: humanId}).then(handleResponse, handleError);
     };
+
+    this.checkin = function(guid) {
+        return $http.post(settings.api + '/check/in/' + guid).then(handleResponse, handleError);
+    };
+
+    this.checkout = function(guid) {
+        return $http.post(settings.api + '/check/out/' + guid).then(handleResponse, handleError);
+    };
 });
 
 odl.controller('ReadyController', function($scope, cordovaService) {
@@ -52,9 +60,9 @@ odl.controller('InfoController', function($scope, $location, $cordovaBarcodeScan
 
     $scope.start = function() {
         delete $scope.device; delete $scope.error; delete $scope.guid;
-        
+
         $cordovaBarcodeScanner.scan().then(function(imageData) {
-            if (!imageData.cancelled && imageData.text) {            
+            if (!imageData.cancelled && imageData.text) {
                 $scope.guid = imageData.text;
                 serverService.getDevice($scope.guid).then(function(device) {
                     $scope.device = device;
@@ -71,10 +79,10 @@ odl.controller('AddController', function($scope, $location, $cordovaBarcodeScann
     }
 
     $scope.start = function() {
-        delete $scope.device; delete $scope.error; delete $scope.guid;
+        delete $scope.device; delete $scope.error; delete $scope.guid; delete $scope.imei; delete $scope.humanId;
 
         $cordovaBarcodeScanner.scan().then(function(imageData) {
-            if (!imageData.cancelled && imageData.text) {            
+            if (!imageData.cancelled && imageData.text) {
                 $scope.guid = imageData.text;
             }
         }, handleError);
@@ -86,7 +94,55 @@ odl.controller('AddController', function($scope, $location, $cordovaBarcodeScann
         }, handleError);
     };
 
-    $scope.start();    
+    $scope.start();
+});
+
+odl.controller('CheckinController', function($scope, $location, $cordovaBarcodeScanner, serverService) {
+    function handleError(error) {
+        $scope.error = error;
+    }
+
+    $scope.start = function() {
+        delete $scope.device; delete $scope.error; delete $scope.guid;
+
+        $cordovaBarcodeScanner.scan().then(function(imageData) {
+            if (!imageData.cancelled && imageData.text) {
+                $scope.guid = imageData.text;
+            }
+        }, handleError);
+    };
+
+    $scope.checkin = function() {
+        serverService.checkin($scope.guid).then(function(device){
+            $scope.device = device;
+        }, handleError);
+    };
+
+    $scope.start();
+});
+
+odl.controller('CheckoutController', function($scope, $location, $cordovaBarcodeScanner, serverService) {
+    function handleError(error) {
+        $scope.error = error;
+    }
+
+    $scope.start = function() {
+        delete $scope.device; delete $scope.error; delete $scope.guid;
+
+        $cordovaBarcodeScanner.scan().then(function(imageData) {
+            if (!imageData.cancelled && imageData.text) {
+                $scope.guid = imageData.text;
+            }
+        }, handleError);
+    };
+
+    $scope.checkout = function() {
+        serverService.checkout($scope.guid).then(function(device){
+            $scope.device = device;
+        }, handleError);
+    };
+
+    $scope.start();
 });
 
 odl.config(function($routeProvider) {

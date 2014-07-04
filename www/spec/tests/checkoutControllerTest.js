@@ -1,4 +1,4 @@
-describe('Add Device Controller', function() {
+describe('Checkout Controller', function() {
 
     var unit;
 
@@ -15,8 +15,8 @@ describe('Add Device Controller', function() {
     };
 
     var createServerMock = function(deferred) {
-        var server = jasmine.createSpyObj('server', ['addDevice']);
-        server.addDevice.and.returnValue(deferred.promise);
+        var server = jasmine.createSpyObj('server', ['checkout']);
+        server.checkout.and.returnValue(deferred.promise);
         return server;
     };
 
@@ -25,7 +25,7 @@ describe('Add Device Controller', function() {
         var scanner = createScannerMock(deferred);
         var server = createServerMock($q.defer());
 
-        $controller('AddController', {$scope: unit, $cordovaBarcodeScanner: scanner, serverService: server});
+        $controller('CheckoutController', {$scope: unit, $cordovaBarcodeScanner: scanner, serverService: server});
 
         expect(unit.device).toBeUndefined();
         expect(unit.guid).toBeUndefined();
@@ -36,23 +36,21 @@ describe('Add Device Controller', function() {
         expect(scanner.scan).toHaveBeenCalled();
     }));
 
-    it('should send an add device request', angular.mock.inject(function($controller, $q, $rootScope) {
+    it('should send a checkout device request', angular.mock.inject(function($controller, $q, $rootScope) {
         var deferred = $q.defer();
         var server = createServerMock(deferred);
 
-        $controller('AddController', {$scope: unit, $cordovaBarcodeScanner: createScannerMock($q.defer()), serverService: server});
+        $controller('CheckoutController', {$scope: unit, $cordovaBarcodeScanner: createScannerMock($q.defer()), serverService: server});
 
         unit.guid = '123456';
-        unit.imei = 'imei number';
-        unit.humanId = 'UK000';
 
-        unit.addDevice();
-        expect(server.addDevice).toHaveBeenCalledWith('123456', 'imei number', 'UK000');
+        unit.checkout();
+        expect(server.checkout).toHaveBeenCalledWith('123456');
 
         expect(unit.device).toBeUndefined();
-        deferred.resolve({name: 'iphone'});
+        deferred.resolve({name: 'iphone', checkin: true});
         $rootScope.$digest();
-        expect(unit.device).toEqual({name: 'iphone'});
+        expect(unit.device).toEqual({name: 'iphone', checkin: true});
     }));
 
     it('should do nothing if the scan is cancelled', angular.mock.inject(function($controller, $q, $rootScope) {
@@ -60,12 +58,12 @@ describe('Add Device Controller', function() {
         var scanner = createScannerMock(scannerDeferred);
         var server = createServerMock($q.defer());
 
-        $controller('AddController', {$scope: unit, $cordovaBarcodeScanner: scanner, serverService: server});
+        $controller('CheckoutController', {$scope: unit, $cordovaBarcodeScanner: scanner, serverService: server});
 
         scannerDeferred.resolve({cancelled: true});
         $rootScope.$digest();
 
-        expect(server.addDevice).not.toHaveBeenCalled();
+        expect(server.checkout).not.toHaveBeenCalled();
     }));
 
     it('should clear the scope at startup', angular.mock.inject(function($controller, $q, $rootScope) {
@@ -75,16 +73,12 @@ describe('Add Device Controller', function() {
         unit.device = {};
         unit.error = "";
         unit.guid = "";
-        unit.imei = 'imei number';
-        unit.humanId = 'UK000';
 
-        $controller('AddController', {$scope: unit, $cordovaBarcodeScanner: scanner, serverService: server});
+        $controller('CheckoutController', {$scope: unit, $cordovaBarcodeScanner: scanner, serverService: server});
 
         expect(unit.device).toBeUndefined();
         expect(unit.guid).toBeUndefined();
         expect(unit.error).toBeUndefined();
-        expect(unit.imei).toBeUndefined();
-        expect(unit.humanId).toBeUndefined();
     }));
 
 });
