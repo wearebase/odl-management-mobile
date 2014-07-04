@@ -38,18 +38,19 @@ describe('Checkin Controller', function() {
 
     it('should send a checkin device request', angular.mock.inject(function($controller, $q, $rootScope) {
         var deferred = $q.defer();
-        var server = createServerMock(deferred);
+        var deferredServer = $q.defer();
+        var server = createServerMock(deferredServer);
+        var scanner = createScannerMock(deferred);
 
-        $controller('CheckinController', {$scope: unit, $cordovaBarcodeScanner: createScannerMock($q.defer()), serverService: server});
+        $controller('CheckinController', {$scope: unit, $cordovaBarcodeScanner: scanner, serverService: server});
 
-        unit.guid = '123456';
-
-        unit.checkin();
-        expect(server.checkin).toHaveBeenCalledWith('123456');
+        unit.guid = '012345679';
 
         expect(unit.device).toBeUndefined();
-        deferred.resolve({name: 'iphone', checkin: true});
+        deferred.resolve({text: '012345679'});
+        deferredServer.resolve({name: 'iphone', checkin: true});
         $rootScope.$digest();
+        expect(server.checkin).toHaveBeenCalledWith('012345679');
         expect(unit.device).toEqual({name: 'iphone', checkin: true});
     }));
 

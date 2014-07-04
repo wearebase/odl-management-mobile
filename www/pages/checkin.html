@@ -1,1 +1,24 @@
-CHECK IN!!!!
+<h3><i class="fa fa-mobile"></i> Device checkin</h3>
+
+<div ng-show="error">
+    <div data-alert class="alert-box alert">
+        <strong>We are sorry: </strong>
+        {{error}}
+        <a href="" class="close">&times;</a>
+    </div>
+    <a class="button success" ng-click="start()"><i class="fa fa-repeat"></i> Try again</a>
+    <a class="button" href="#"><i class="fa fa-arrow-left"></i> Go back</a>
+</div>
+
+<div ng-show="device">
+    <div data-alert class="alert-box success">
+        <strong>Device successfully checked in</strong>
+        <a href="" class="close">&times;</a>
+    </div>
+    <a class="button success" ng-click="start()"><i class="fa fa-repeat"></i> One more!</a>
+    <a class="button" href="#"><i class="fa fa-arrow-left"></i> Home</a>
+
+    <div ng-show="device" ng-include="'pages/device.html'"></div>
+</div>
+
+<script>$(document).foundation();</script>

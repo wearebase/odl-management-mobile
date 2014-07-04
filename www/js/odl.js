@@ -108,6 +108,7 @@ odl.controller('CheckinController', function($scope, $location, $cordovaBarcodeS
         $cordovaBarcodeScanner.scan().then(function(imageData) {
             if (!imageData.cancelled && imageData.text) {
                 $scope.guid = imageData.text;
+                $scope.checkin();
             }
         }, handleError);
     };
@@ -132,6 +133,7 @@ odl.controller('CheckoutController', function($scope, $location, $cordovaBarcode
         $cordovaBarcodeScanner.scan().then(function(imageData) {
             if (!imageData.cancelled && imageData.text) {
                 $scope.guid = imageData.text;
+                $scope.checkout();
             }
         }, handleError);
     };
@@ -161,10 +163,10 @@ odl.config(function($routeProvider) {
     })
     .when('/checkin', {
         templateUrl: 'pages/checkin.html',
-        controller: 'ReadyController'
+        controller: 'CheckinController'
     })
     .when('/checkout', {
         templateUrl: 'pages/checkout.html',
-        controller: 'ReadyController'
+        controller: 'CheckoutController'
     });
 });
