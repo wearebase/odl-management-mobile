@@ -5,12 +5,13 @@
   "devDependencies": {
     "cordova": "*",
     "grunt": "~0.4.1",
+    "grunt-bower-install-simple": "~0.9.3",
+    "grunt-contrib-jasmine": "*",
     "grunt-contrib-jshint": "~0.6.0",
     "grunt-contrib-watch": "~0.4.0",
-    "grunt-contrib-jasmine": "*",
     "grunt-shell": "~0.3.0",
-    "matchdep": "~0.1.1",
-    "grunt-bower-install-simple": "~0.9.3"
+    "grunt-template-jasmine-istanbul": "^0.3.0",
+    "matchdep": "~0.1.1"
   },
   "scripts": {
     "test": "grunt test"

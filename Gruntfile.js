@@ -86,6 +86,22 @@
 
             },
             jasmine: {
+                istanbul: {
+                    src: '<%= jasmine.customTemplate.src %>',
+                    options: {
+                        vendor: '<%= jasmine.customTemplate.options.vendor %>',
+                        specs: '<%= jasmine.customTemplate.options.specs %>',
+                        helpers: '<%= jasmine.customTemplate.options.helpers %>',
+                        template: require('grunt-template-jasmine-istanbul'),
+                        templateOptions: {
+                            coverage: 'coverage/json/coverage.json',
+                            report: [
+                                {type: 'html', options: {dir: 'coverage/html'}},
+                                {type: 'text-summary'}
+                            ]   
+                        }   
+                    }   
+                },
                 customTemplate: {
                     src: 'www/js/**/*.js',
                     options: {
@@ -244,7 +260,7 @@
 
         grunt.registerTask('install', ['bower-install-simple', 'cordova-install']);
 
-        grunt.registerTask('test', ['jshint', 'jasmine']);
+        grunt.registerTask('test', ['jshint', 'jasmine:istanbul']);
 
         grunt.registerTask('default', ['test']);
     };

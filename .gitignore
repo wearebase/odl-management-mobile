@@ -3,3 +3,5 @@ plugins
 merges
 node_modules
 www/components
+coverage
+keystore
