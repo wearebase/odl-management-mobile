@@ -1,6 +1,6 @@
 angular.module('config', [])
 .constant('settings', {
-    api: 'http://odl-uat.herokuapp.com/api'
+    api: 'http://odl.herokuapp.com/api'
 });
 
 var odl = angular.module('odl', ['config', 'ngRoute', 'ngAnimate', 'ngCordova']);
